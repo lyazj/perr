@@ -1,0 +1,1 @@
+An (expected) portable version of `err.h` and `err.c`, with all 8 utility functions doing the same things as their `glibc` counterparts, however, without locking the underlying stream (i.e., `stderr`) while outputing warning/error messages.
