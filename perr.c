@@ -28,10 +28,12 @@ void vwarnx(const char *fmt, va_list args)
 
 void vwarn(const char *fmt, va_list args)
 {
+  int eno = errno;
+
   fprintf(stderr, "%s: ", program_invocation_short_name);
   if(fmt)
     vfprintf(stderr, fmt, args);
-  fprintf(stderr, "%s%s\n", fmt ? ": " : "", strerror(errno));
+  fprintf(stderr, "%s%s\n", fmt ? ": " : "", strerror(eno));
 }
 
 void verrx(int eval, const char *fmt, va_list args)
