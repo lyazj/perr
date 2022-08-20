@@ -44,10 +44,10 @@ int main(void)
       exit(EXIT_FAILURE);
     }
     if(!WIFEXITED(wstatus))
-      printf("process %d"
+      fprintf(stderr, "process %d"
           " terminated abnormally\n", pid);
     else
-      printf("process %d"
+      fprintf(stderr, "process %d"
           " exited with status code %d\n", pid, WEXITSTATUS(wstatus));
   }
 
