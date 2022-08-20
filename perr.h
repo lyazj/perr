@@ -1,7 +1,19 @@
 #ifndef HDR_PERR
 #define HDR_PERR
 
-#include <stdarg.h>
+#undef noreturn
+#ifdef __cplusplus
+#define noreturn [[noreturn]]
+extern "C" {
+#else  /* __cplusplus */
+#define noreturn _Noreturn
+#endif  /* __cplusplus */
+
+#ifdef _WIN32
+#define PATHDELIM '\\'
+#else  /* _WIN32 */
+#define PATHDELIM '/'
+#endif  /* _WIN32 */
 
 #undef  program_invocation_short_name
 #undef  vwarnx
@@ -23,21 +35,9 @@
 #define errx                          portable_errx
 #define err                           portable_err
 
-#ifdef _WIN32
-#define PATHDELIM '\\'
-#else  /* _WIN32 */
-#define PATHDELIM '/'
-#endif  /* _WIN32 */
+#include <stdarg.h>
 
 extern char *program_invocation_short_name;
-
-#undef noreturn
-#ifdef __cplusplus
-#define noreturn [[noreturn]]
-extern "C" {
-#else  /* __cplusplus */
-#define noreturn _Noreturn
-#endif  /* __cplusplus */
 
 void perr_init(int argc, char *argv[]);
 void vwarnx(const char *fmt, va_list args);
